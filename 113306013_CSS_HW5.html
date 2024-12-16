@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="113306013_CSS_HW5.css">
+</head>
+<body>
+	<div class="main-container">
+        <!-- Left Panel -->
+        <div class="left-panel">
+            <div class="photo-panel">
+            	<img src="MY.jpg" alt="MY" width="280px" />
+                <p><center><h1 id="name">HSUNJOU</h1></center></p>
+                <button id="editName">Edit</button>
+            </div>
+            <div class="text-content">
+                <section class="about-me">
+                    <h2>About Me</h2>
+                    <p>早安早安！我是政治大學資訊管理學系大一新生黃熏柔，也可以叫我Zoe或久井。平常的興趣包括電競（目前迷戀Faker與T1）、追星（喜歡葉舒華），也喜歡看小說。專長是寫作、排版與報告。MBTI是ENTJ，最近正在嘗試寫脫口秀的段子。近期目標是努力度過期中並且通過日檢，祝我好運。</p>
+                </section>
+                <section class="contact-info">
+                    <h2>Contact Info</h2>
+                    <p>Email: 113306013@nccu.edu.tw</p>
+                </section>
+            </div>
+            <img src = "NCCU.png" alt = "NCCU" width = "280px"/>
+        </div>
+        <!-- Right Panel -->
+        <div class="right-panel">
+            <section class="education">
+                <h2>Education</h2>
+                <div class="timeline">
+                    <div class="entry">
+                        <span class="year">2021-<br>2023</span>
+                        <span class="description">就讀於港明高級中學
+                    </div>
+                    <div class="entry">
+                        <span class="year">2022-<br>2023</span>
+                        <span class="description">在校刊社擔任主編
+                    </div>
+                    <div class="entry">
+                        <span class="year">2024-<br>now</span>
+                        <span class="description">就讀於政治大學資訊管理學系</span>
+                    </div>
+                </div>
+            </section>
+            <section class="homework-list">
+                <h2>Homework List</h2>
+                <ul>
+                    <li>HW1 -   <a href="https://github.com/hsunjou/HW2.git">https://github.com/hsunjou/HW1.git</a></li><br>
+                    <li>HW2 -   <a href="https://github.com/hsunjou/Excel1.git">https://github.com/hsunjou/HW2.git</a></li><br>
+                    <li>HW3 -   <a href="https://github.com/hsunjou/HW3.git" target="_blank">https://github.com/hsunjou/HW3.git</a></li>
+                </ul>
+            </section>
+            <section class="favorite-music">
+                <h2>Favorite Music</h2>
+                <div class="music-gallery">
+                    <div class="music-item">
+                         <a href="https://youtu.be/kYhh1PpsOg4?si=NhPPZ2WlVxma9NMU" target="_blank"><img src="YT.png" alt="YT"></a>
+                        <p>珊瑚海</p>
+                    </div>
+                    <div class="music-item">
+                         <a href="https://youtu.be/jdf3gxFP0F8?si=hbfoccii7chv0GFh" target="_blank"><img src="YT.png" alt="YT"></a>
+                        <p>美人魚</p>
+                    </div>
+                    <div class="music-item">
+                         <a href="https://youtu.be/cOBQgUZnceg?si=qzshtWw8JGfbteN7" target="_blank"><img src="YT.png" alt="YT"></a>
+                        <p>說愛你</p>
+                    </div>
+                    <div class="music-item">
+                         <a href="https://youtu.be/dmwJaG-R1iM?si=Cd4e6J6LkRrmkqOk" target="_blank"><img src="YT.png" alt="YT"></a>
+                        <p>歐若拉</p>
+                    </div>
+                </div>
+                <button id="addMusic">Add Music</button>
+                <p class="music-note">你站在橋上看風景，看風景的人在樓上看你。明月裝飾了你的窗子，你裝飾了别人的夢。</p>
+            </section>
+        </div>
+    </div>
+    <script>
+        const editButton = document.getElementById('editName');
+const nameElement = document.getElementById('name');
+let isEditing = false;
+
+editButton.addEventListener('click', () => {
+    if (isEditing) {
+        // Save the new name
+        const inputField = document.getElementById('nameInput');
+        if (inputField.value.trim() !== "") {
+            nameElement.textContent = inputField.value;
+        }
+        inputField.remove();
+        editButton.textContent = 'Edit';
+    } else {
+        // Enter edit mode
+        const inputField = document.createElement('input');
+        inputField.type = 'text';
+        inputField.id = 'nameInput';
+        inputField.value = nameElement.textContent;
+        nameElement.textContent = '';
+        nameElement.appendChild(inputField);
+        editButton.textContent = 'Save';
+    }
+    isEditing = !isEditing;
+});
+
+const addMusicButton = document.getElementById('addMusic');
+const musicGallery = document.getElementById('musicGallery');
+
+addMusicButton.addEventListener('click', () => {
+    // Create form elements
+    const form = document.createElement('form');
+    form.id = 'musicForm';
+
+    const nameInput = document.createElement('input');
+    nameInput.type = 'text';
+    nameInput.placeholder = 'Enter music name';
+    nameInput.id = 'musicName';
+    form.appendChild(nameInput);
+
+    const linkInput = document.createElement('input');
+    linkInput.type = 'text';
+    linkInput.placeholder = 'Enter music link';
+    linkInput.id = 'musicLink';
+    form.appendChild(linkInput);
+
+    const submitButton = document.createElement('button');
+    submitButton.type = 'button';
+    submitButton.textContent = 'Submit';
+    form.appendChild(submitButton);
+
+    // Append form to body
+    document.body.appendChild(form);
+
+    // Handle submit
+    submitButton.addEventListener('click', () => {
+        const musicName = nameInput.value.trim();
+        const musicLink = linkInput.value.trim();
+
+        if (!musicName || !musicLink) {
+            alert('Please fill in both fields.');
+            return;
+        }
+
+        // Create new music item
+        const musicItem = document.createElement('div');
+        musicItem.className = 'music-item';
+
+        const link = document.createElement('a');
+        link.href = musicLink;
+        link.target = '_blank';
+        const img = document.createElement('img');
+        img.src = 'YT.png';
+        img.alt = 'Music Icon';
+        link.appendChild(img);
+
+        const name = document.createElement('p');
+        name.textContent = musicName;
+
+        musicItem.appendChild(link);
+        musicItem.appendChild(name);
+
+        // Add new item to the gallery
+        musicGallery.appendChild(musicItem);
+
+        // Remove form
+        form.remove();
+        });
+        });
+    </script>
+</body>
+</html>
